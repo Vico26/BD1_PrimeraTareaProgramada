@@ -1,13 +1,37 @@
+<!--Proyecto1 Index-Navegador donde se muestran las tablas.
+Ultimo update: 16:40-->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Proyecto Practica</title>
-    </head>
-    <body>
-        <header>Bienvenido a 2084</header>
-        <script src="main.js"></script>
-    </body>
-</html> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto1</title>
+    <style>      /*Estilo de la tabla con CSS directo en html*/
+        table,th,td{               
+            border: 1px solid black;
+            margin: auto;
+            border-collapse: collapse;
+            font-size:90%;
+        }
+        th,td{
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style=background-color:#fff8dc;><!--Color de fondo-->
+    <h1 style="font: size 150%;">Sistema de empleados<h1>
+        <table>          <!--Tabla de empleados-->
+            <tr>                    <!--Primera fila de encabesado-->
+                <th>Id</th>         <!--Columna ID-->
+                <th>Nombre</th>     <!--Columna Nombre-->
+                <th>Salario</th>    <!--Columna Salario-->
+            </tr>
+            <tr>           <!--Fila de datos-->
+                <script>    //Logica para agregar la info a la tabla, desde la BD al frontEnd
+
+                </script>
+            </tr>
+            <tbody id="data"></tbody>
+</body>
+</html>
