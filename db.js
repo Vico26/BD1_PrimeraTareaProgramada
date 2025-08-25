@@ -8,14 +8,10 @@ Para el servidor se esta manejando SQL Server, en conjunto con MSSQL
 const sql=require('mssql');
 
 const config={              //configuracion de la base de datos
-    user:'sa',              //usuario del servidor
-    password:'aWo3lp0lloC1x',   //contraseña del servidor
+    user:'admin_viewer',              //usuario del servidor, para entrar desde otro lado(locally)
+    password:'c0nTr4S3nNi1a',   //contraseña del servidor
     server:'DESKTOP-VICTORI',   //Servidor donde se esta corriendo la base de datos
     database:'Empresa',         //Nombre de la base de datos
-    options:{       //opciones de conexion
-        encrypt:manatory,
-        trustServerCertificate:true
-    }
 };
 module.exports={sql,config};        //exportacion del modulo para ser utilizado en otros archivos
 
