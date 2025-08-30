@@ -1,38 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto1</title>
-    <style>      /*Estilo de la tabla con CSS directo en html*/
-        table,th,td{               
-            border: 1px solid black;
-            margin: auto;
-            border-collapse: collapse;
-            font-size:90%;
-        }
-        th,td{
-            padding: 5px;
-            text-align: center;
-        }
-        h1{
-            text-align: center;
-        }
-    </style>
-</head>
-<body style=background-color:#fff8dc;><!--Color de fondo-->
-    <h1 style="font: size 150%;">Empleados<h1>
-        <table>          <!--Tabla de empleados-->
-            <tr>                    <!--Primera fila de encabesado-->
-                <th>Id</th>         <!--Columna ID-->
-                <th>Nombre</th>     <!--Columna Nombre-->
-                <th>Salario</th>    <!--Columna Salario-->
-            </tr>
-            <tr>           <!--Fila de datos-->
-                <script>    //Logica para agregar la info a la tabla, desde la BD al frontEnd
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto1</title>
+  <style>
+   
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      margin: auto;
+      font-size: 120%;
+      
+    }
 
-                </script>
-            </tr>
-            <tbody id="data"></tbody>
+    th, td {
+      padding: 5px;
+      text-align: left;
+      color: black;
+      background-color: #f9f9f9; /* Color del cuadro  */
+      transition: background-color 0.3s ease;/* tiempo para que cambie, si le baja es insteanteo o lento si le sube */
+    }
+
+    th {
+      background-color: #c61f47;
+      color: white;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 150%;
+    }
+
+    tr:hover td {
+      background-color:yellow /* Color al pasar el mouse */
+    }
+  </style>
+</head>
+<body style="background-color: #fff8dc;">
+  <h1>Empleados</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Salario</th>
+      </tr>
+    </thead>
+    <tbody id="data">
+      <tr>
+        <td>1</td>
+        <td>Juan</td>
+        <td>50000</td>
+      </tr>
+        <tr>
+            <td>2</td>
+            <td>María</td>
+            <td>60000</td>
+    </tbody>
+  </table>
+
+  <script>
+    // Aquí puedes agregar tu lógica personalizada
+  </script>
 </body>
 </html>
