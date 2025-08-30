@@ -8,9 +8,9 @@ Para el servidor se esta manejando SQL Server, en conjunto con MSSQL
 const sql=require('mssql');
 
 const config={              //configuracion de la base de datos
-    user:'sa',              //usuario del servidor, para la conexion de la BD
-    password:'aWo3lp0lloC1x',   //contraseña del servidor
-    server:'DESKTOP-VICTORI',   //Servidor donde se esta corriendo la base de datos
+    user:'admin_viewer',              //usuario del servidor, para entrar desde otro lado(locally)
+    password:'c0nTr4S3nNi1a',   //contraseña del user admin_viewer
+    server:'25.50.124.70,1433',   //Servidor donde se esta corriendo la base de datos(IP de Hamachi)
     database:'Empresa',         //Nombre de la base de datos
     options:{
         encrypt:true,
@@ -18,5 +18,3 @@ const config={              //configuracion de la base de datos
     }
 };
 module.exports={sql,config};        //exportacion del modulo para ser utilizado en otros archivos
-
-    

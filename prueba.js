@@ -1,8 +1,18 @@
-const express = require("express");
-const app = express();
+const { sql, config } = require('./db');
 
-app.get("/", (req, res) => {
-  res.send("Hola, mundo!");
-});
+async function probarConexion() {
+    try {
+        let pool = await sql.connect(config);
 
-app.listen(3000, () => console.log("Servidor corriendo en http://localhost:3000"));
+        // Ejemplo: leer clientes
+        let result = await pool.request().execute('sp_obtenerEmpleados');
+
+        console.log("Resultados:", result.recordset);  // 👈 esto imprime los datos en consola
+
+        sql.close();
+    } catch (err) {
+        console.error("Error probando la conexión:", err);
+    }
+}
+
+module.exports={probarConexion};
