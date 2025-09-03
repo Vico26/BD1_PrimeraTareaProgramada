@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Proyecto1</title>
   <style>
+    body{
+      font-family: Arial, sans-serif;
+      background-color: #fff8dc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
    
     table, th, td {
       border: 1px solid black;
@@ -29,39 +38,89 @@
 
     h1 {
       text-align: center;
-      font-size: 150%;
+      font-family: Arial, sans-serif;
+      font-size: 250%;
     }
 
     tr:hover td {
       background-color:yellow /* Color al pasar el mouse */
     }
+    #panelEmpleados {
+            width: 400px;
+            height: 300px;
+            border: 1px solid #333;
+            overflow-y: scroll; /* scroll vertical */
+            padding: 10px;
+        }
+        .empleado {
+            padding: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .empleado:last-child {
+            border-bottom: none;
+        }
+        #btnAgregar {
+            margin-top:20px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 21px;
+            font-family: Arial, sans-serif;
+            background-color: #51b5f0;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+        }
   </style>
 </head>
 <body style="background-color: #fff8dc;">
   <h1>Empleados</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Salario</th>
-      </tr>
-    </thead>
-    <tbody id="data">
-      <tr>
-        <td>1</td>
-        <td>Juan</td>
-        <td>50000</td>
-      </tr>
-        <tr>
-            <td>2</td>
-            <td>María</td>
-            <td>60000</td>
-    </tbody>
-  </table>
+  <div id="panelEmpleados"></div>
+  <button id="btnAgregar">Insertar Empleado</button>
 
   <script>
-    // aqui se le mete el SQL
+    async function fetchEmpleados() {
+    try {
+      const res = await fetch("/empleados");   // espera la respuesta
+      const data = await res.json();           // espera el JSON
+      const panel = document.getElementById("panelEmpleados");
+
+      // construimos la tabla
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Salario</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      data.forEach(element => {
+        html += `
+          <tr>
+            <td>${element.id}</td>
+            <td>${element.Nombre}</td>
+            <td>${element.Salario}</td>
+          </tr>
+        `;
+      });
+
+      html += "</tbody></table>";
+      panel.innerHTML = html;
+    } catch(error) {
+      console.error("Error al obtener empleados:", error);
+    }
+  }
+
+  // se ejecuta apenas cargue la página
+  window.onload = fetchEmpleados;
+
+  // si además quieres refrescar cada 5s:
+  setInterval(fetchEmpleados, 5000);
+
   </script>
 </body>
 </html>
