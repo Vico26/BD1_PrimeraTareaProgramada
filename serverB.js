@@ -1,5 +1,5 @@
 const express = require("express"); // Importa Express
-const { obtenerEmpleados } = require("./data"); // Importa la función obtenerEmpleados desde data.js
+const { obtenerEmpleados } = require("./dataObtener"); // Importa la función obtenerEmpleados desde data.js
 const app = express();  // Crea una instancia de la app Express
 
 // Middleware para parsing de JSON, sin el parsing daba error
