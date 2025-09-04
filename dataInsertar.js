@@ -1,3 +1,4 @@
+//const { obtenerEmpleados } = require('./dataObtener');
 const {sql,config}=require('./db');  //importacion del modulo de la base de datos
 async function insertarEmpleado(nombre, salario){
     try{
@@ -19,4 +20,3 @@ async function insertarEmpleado(nombre, salario){
     }
 }
 module.exports={insertarEmpleado};   //exportacion de la funcion para ser utilizada en otros archivos
-insertarEmpleado("Antonio Barrantes Madrigal", 120000.00);

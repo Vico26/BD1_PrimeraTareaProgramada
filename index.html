@@ -71,14 +71,77 @@
             border: none;
             cursor: pointer;
         }
+        #abrirModal{
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 21px;
+            font-family: Arial, sans-serif;
+            background-color: #51b5f0;
+            color: rgb(0, 0, 0);
+            border: none;
+            cursor: pointer;
+        }
+        .modal{
+          display: none;
+          position: fixed;
+          z-index: 1000;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%; 
+          background-color: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;         
+        }
+        .modal-content{
+          background-color: #fefefe;
+          padding: 20px;
+          border-radius: 10px;
+          width: 300px;
+          text-align: center;
+        }
+        .modal-content input{
+          width: 90%;
+          padding: 8px;
+          margin: 10px 0;
+        }
+        .modal-content button{
+          padding: 8px 15px;
+          border-radius: 5px;
+          font-size: 16px;
+          margin: 5px;
+          border: none;
+          cursor: pointer;
+          background:  #c61f47;
+          color: white;
+        }
   </style>
 </head>
 <body style="background-color: #fff8dc;">
   <h1>Empleados</h1>
   <div id="panelEmpleados"></div>
+
   <button id="btnAgregar">Insertar Empleado</button>
 
+  <div id="modalIngresarEmpleados" class="modal">
+    <div class="modal-content">
+      <h2>Agregar Empleado</h2>
+      <input type="text" id="nombre" placeholder="Nombre" />
+      <input type="number" id="salario" placeholder="Salario" />
+      <button id="btnGuardar">Guardar</button>
+      <button id="btnCerrar">Regresar</button>
+    </div>
   <script>
+    const modal = document.getElementById("modalIngresarEmpleados");
+    document.getElementById("btnAgregar").onclick =() =>modal.style.display = "flex";
+    document.getElementById("btnCerrar").onclick = cerrarModalInsertar;
+    document.getElementById("btnGuardar").onclick = insertarEmpleado;
+
+    function cerrarModalInsertar(){
+      modal.style.display = "none";
+    }
+
     async function fetchEmpleados() {
     try {
       const res = await fetch("/empleados");   // espera la respuesta
@@ -86,7 +149,7 @@
       const panel = document.getElementById("panelEmpleados");
 
       // construimos la tabla
-      let html = `
+      let htmlTablaEmpleados = `
         <table>
           <thead>
             <tr>
@@ -99,7 +162,7 @@
       `;
 
       data.forEach(element => {
-        html += `
+        htmlTablaEmpleados += `
           <tr>
             <td>${element.id}</td>
             <td>${element.Nombre}</td>
@@ -108,10 +171,39 @@
         `;
       });
 
-      html += "</tbody></table>";
-      panel.innerHTML = html;
+      htmlTablaEmpleados += "</tbody></table>";
+      panel.innerHTML = htmlTablaEmpleados;
     } catch(error) {
-      console.error("Error al obtener empleados:", error);
+      console.error("Error al crear la tabla de empleados.", error);
+    }
+  }
+  async function insertarEmpleado(){
+    const nombre = document.getElementById("nombre").value;
+    const salario = document.getElementById("salario").value;
+
+    if(!nombre || !salario){
+      alert("Todos los espacios deben estar llenos.");
+      return;
+    }
+
+    try{
+      const res = await fetch("/empleados", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({nombre, salario})
+      });
+
+      if(res.ok){
+        cerrarModalInsertar();
+        fetchEmpleados(); // refresca la lista
+        alert("Empleado insertado exitosamente.");
+      } else {
+        alert("Error al insertar empleado.");
+      }
+    } catch(error){
+      console.error("Error al insertar empleado:", error);
     }
   }
 
@@ -119,7 +211,7 @@
   window.onload = fetchEmpleados;
 
   // si además quieres refrescar cada 5s:
-  setInterval(fetchEmpleados, 5000);
+  //setInterval(fetchEmpleados, 5000);
 
   </script>
 </body>
