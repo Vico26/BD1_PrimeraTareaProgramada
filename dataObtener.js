@@ -16,5 +16,5 @@ async function obtenerEmpleados(){          //funcion para obtener los empleados
         throw err;
     }
 }
-//obtenerEmpleados();
+obtenerEmpleados();
 module.exports={obtenerEmpleados};   //exportacion de la funcion para ser utilizada en otros archivos
